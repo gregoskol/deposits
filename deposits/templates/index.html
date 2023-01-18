@@ -1,0 +1,50 @@
+<!DOCTYPE html> <!-- Используется html 5 версии -->
+{% load static %}
+<html lang="ru"> <!-- Язык сайта - русский -->
+  <head>
+    <meta charset="utf-8"> <!-- Кодировка сайта -->
+    <!-- Сайт готов работать с мобильными устройствами -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Подключен файл со стандартными стилями бустрап -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <title>Статистика портфеля</title>
+    <link rel="icon" type="image/png" sizes="192x192" href="{% static 'img/fav/android-chrome-192x192.png' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  </head>
+  <body>
+    {% for actives in active_list %}
+      {% for active in actives %}
+        <div class="row">
+          <aside class="col-12 col-md-1"> 
+          </aside>
+          <aside class="col-12 col-md-2"> 
+            {{ active.name }}
+          </aside> 
+          <aside class="col-12 col-md-2"> 
+            {{ active.description }}
+          </aside> 
+          <aside class="col-12 col-md-2">
+            {% if active.result_rouble < 0 %}
+              <span style="color:red">{{ active.result_rouble|floatformat:2 }} руб</span>
+            {% else %}
+              <span style="color:green">{{ active.result_rouble|floatformat:2 }} руб</span>
+            {% endif %}
+          </aside> 
+          <aside class="col-12 col-md-2"> 
+            {% if active.result_percent < 0 %}
+              <span style="color:red">{{ active.result_percent|floatformat:2 }} %</span>
+            {% else %}
+              <span style="color:green">{{ active.result_percent|floatformat:2 }} %</span>
+            {% endif %}
+          </aside>
+          <aside class="col-12 col-md-2"> 
+            {{ active.actual_price|floatformat:2 }} руб
+          </aside>
+          <aside class="col-12 col-md-1"> 
+          </aside>
+        </div>
+      {% endfor %}
+    {% endfor %}
+    <center>{{ total|floatformat:0 }}
+  </body>
+</html>
