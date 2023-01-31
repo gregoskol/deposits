@@ -22,7 +22,12 @@ source venv/Scripts/activate
 python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
-4. Выполните миграции, запустите проект:
+4. Перейдите в папку deposits и создайте суперпользователя:
+```sh
+cd deposits
+python manage.py createsuperuser
+```
+5. Выполните миграции, запустите проект:
 ```sh
 python manage.py migrate
 python manage.py runserver
